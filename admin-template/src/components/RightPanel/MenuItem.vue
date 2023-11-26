@@ -16,12 +16,16 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
-
+import { defineProps, onMounted, ref } from 'vue'
 
 
 defineProps({
   route: { type: Object, default: () => ({}) },
+})
+
+
+onMounted(() => {
+
 })
 </script>
 

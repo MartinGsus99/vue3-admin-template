@@ -9,6 +9,7 @@ import ElementPlus from 'element-plus'
 import "element-plus/dist/index.css"
 import * as ElementPlusIconsVue from '@element-plus/icons-vue' // 引入element-plus图标
 
+
 const app = createApp(App)
 app.use(store)
 app.use(router)

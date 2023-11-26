@@ -7,10 +7,12 @@
         </el-aside>
         <el-container>
           <el-header>
-            <TopBar> </TopBar>
+            <TopBar></TopBar>
           </el-header>
           <el-main class="main-container">
-            <HeaderPanel></HeaderPanel>
+            <transition name="fade-transform" mode="out-in">
+              <router-view :key="key"></router-view>
+            </transition>
           </el-main>
         </el-container>
       </el-container>
@@ -18,24 +20,21 @@
   </div>
 </template>
 
-
-<script>
+<script setup>
 import RightPanel from '../components/RightPanel/index.vue'
 import HeaderPanel from '../components/HeaderPanel/index.vue'
 import TopBar from '../components/TopBar/index.vue'
-export default {
-  name: 'Layout',
-  components: { RightPanel, HeaderPanel, TopBar },
-}
+
+const key = 'uniqueKey' // 为了强制重新渲染 HeaderPanel 组件，你可以使用一个唯一的 key 属性
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .common-layout {
-  height: 100vh; /* 设置高度为视窗的100% */
+  height: 100vh;
 }
 
 .full-height {
-  height: 100%; /* 设置内部元素的高度为父容器的100% */
+  height: 100%;
 }
 
 .main-container {
