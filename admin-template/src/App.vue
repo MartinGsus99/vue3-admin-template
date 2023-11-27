@@ -1,10 +1,12 @@
-<template><router-view /></template>
+<template>
+  <div class="">
+    <router-view></router-view>
+  </div>
+</template>
 
-<script>
-export default {
-  name: "App",
-};
+<script setup lang="ts">
+import {onMounted} from "vue"
+
 </script>
 
-<style lang="less" scoped>
-</style> 
+<style lang="scss" scoped></style>
