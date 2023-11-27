@@ -10,6 +10,8 @@ interface dataType {
 export interface loginResponseData {
   code: number
   data: dataType
+  success: boolean
+  message: string
 }
 
 interface userInfo {
@@ -23,4 +25,3 @@ export interface userInfoResponseData {
   code: number
   data: userInfo
 }
-

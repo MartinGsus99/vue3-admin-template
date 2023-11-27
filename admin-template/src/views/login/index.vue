@@ -1,96 +1,113 @@
 <template>
   <div class="login-container">
-    <form @submit.prevent="login" class="login-form">
-      <h2>Login</h2>
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" v-model="username" required />
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" required />
-      </div>
-
-      <button type="submit">Login</button>
-    </form>
+    <el-row>
+      <el-col :span="12" :xs="0"></el-col>
+      <el-col :span="12" :xs="24">
+        <el-form class="login-form">
+          <h1>Login</h1>
+          <h2>Welcome to your sys!</h2>
+          <el-form-item>
+            <el-input v-model="form.username" placeholder="Username">
+              <template #prefix>
+                <el-icon>
+                  <User />
+                </el-icon>
+              </template>
+            </el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input
+              v-model="form.password"
+              placeholder="Password"
+              type="password"
+              show-password
+            >
+              <template #prefix>
+                <el-icon>
+                  <Lock />
+                </el-icon> </template
+            ></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button class="login-btn" :loading="isLoading" type="primary" @click="login"
+              >登录</el-button
+            >
+          </el-form-item>
+        </el-form>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'Login',
-  data() {
-    return {
-      username: '',
-      password: '',
-    };
-  },
-  methods: {
-    login() {
-      // Implement your login logic here
-      console.log('Login with username:', this.username, 'and password:', this.password);
-      this.$router.push({ name: 'index' });
-    },
-  },
-});
+<script setup lang="ts">
+import { reactive,ref } from 'vue'
+import { User, Lock } from '@element-plus/icons-vue'
+import { login } from '@/api/system/user/index.ts'
+import useUserStore from '@/store/modules/user.ts'
+import { useRouter } from 'vue-router'
+import { ElNotification } from 'element-plus'
+let useStore=useUserStore()
+let $router=useRouter()
+let form = reactive({
+  username: '',
+  password: '',
+})
+let isLoading=ref(false)
+const login = async() => {
+  isLoading.value=true
+  try{
+    await useStore.userLogin(form)
+    isLoading.value=false
+    //编程式导航跳转到首页
+    $router.push({path:'/'})
+    ElNotification({
+      type: 'success',
+      title:'登录信息',
+      message: '登录成功',
+    })
+  }catch(error){
+    isLoading.value=false
+    ElNotification({
+      type: 'error',
+      title:'登录信息',
+      message: error.message||'登录失败',
+    })
+  }
+}
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
   height: 100vh;
-}
+  background: url('@/assets/bg.jpg') no-repeat;
+  background-size: cover;
 
-.login-form {
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px; /* Adjusted maximum width */
-  width: 100%; /* Full width within the max-width */
-}
+  .login-form {
+    width: 400px;
+    height: 40vh;
+    position: relative;
+    top: 30vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    padding: 40px;
 
-h2 {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
+    h1 {
+      color: rgb(188, 149, 149);
+      font-size: 40px;
+    }
+    h2 {
+      color: rgb(188, 149, 149);
+      font-size: 20px;
+      margin: 20px 0;
+    }
 
-.form-group {
-  margin-bottom: 16px;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  color: #555;
-}
-
-input {
-  width: 100%;
-  padding: 12px; /* Adjusted padding */
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-button {
-  width: 100%;
-  padding: 14px; /* Adjusted padding */
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #0056b3;
+    .login-btn {
+      width: 100%;
+    }
+  }
 }
 </style>
