@@ -20,7 +20,6 @@ request.interceptors.request.use((config) => {
 request.interceptors.response.use(
   (response) => {
     //简化数据
-    console.log('res', response)
 
     return response.data
   },

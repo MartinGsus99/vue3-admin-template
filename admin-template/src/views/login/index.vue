@@ -3,10 +3,15 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login-form">
+        <el-form
+          class="login-form"
+          ref="loginForm"
+          :model="form"
+          :rules="rules"
+        >
           <h1>Login</h1>
           <h2>Welcome to your sys!</h2>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input v-model="form.username" placeholder="Username">
               <template #prefix>
                 <el-icon>
@@ -15,7 +20,7 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               v-model="form.password"
               placeholder="Password"
@@ -29,7 +34,11 @@
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button class="login-btn" :loading="isLoading" type="primary" @click="login"
+            <el-button
+              class="login-btn"
+              :loading="isLoading"
+              type="primary"
+              @click="login"
               >登录</el-button
             >
           </el-form-item>
@@ -40,39 +49,85 @@
 </template>
 
 <script setup lang="ts">
-import { reactive,ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { User, Lock } from '@element-plus/icons-vue'
 import { login } from '@/api/system/user/index.ts'
 import useUserStore from '@/store/modules/user.ts'
 import { useRouter } from 'vue-router'
 import { ElNotification } from 'element-plus'
-let useStore=useUserStore()
-let $router=useRouter()
+import { getTimeHelloMessage } from '@/utils/time.ts'
+
+let useStore = useUserStore()
+
+let $router = useRouter()
+
 let form = reactive({
   username: '',
   password: '',
 })
-let isLoading=ref(false)
-const login = async() => {
-  isLoading.value=true
-  try{
-    await useStore.userLogin(form)
-    isLoading.value=false
-    //编程式导航跳转到首页
-    $router.push({path:'/'})
-    ElNotification({
-      type: 'success',
-      title:'登录信息',
-      message: '登录成功',
-    })
-  }catch(error){
-    isLoading.value=false
-    ElNotification({
-      type: 'error',
-      title:'登录信息',
-      message: error.message||'登录失败',
-    })
+
+let isLoading = ref(false)
+
+const validateUsername=(rule:any,value:string,callback:any)=>{
+  //rule:规则对象 value:表单文本值 callback:回调
+  console.log(value);
+  if(/^\d{5,10}$/.test(value)){
+    callback()
+  }else{
+    callback(new Error('用户名至少需要5个字符'))
   }
+}
+
+const validatePassword=(rule:any,value:string,callback:any)=>{
+  //rule:规则对象 value:表单文本值 callback:回调
+  console.log(value);
+  if(value.length<6){
+    callback(new Error('密码至少需要6个字符'))
+  }else if(value.length>20){
+    callback(new Error('密码最多20个字符'))
+  }else{
+    callback()
+  }
+}
+
+const rules = ref({
+  username: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { validator:validateUsername, trigger: 'change' },
+  
+  ],
+  password: [
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { validator:validatePassword, trigger: 'change' },
+  ],
+})
+
+let loginForm = ref()
+
+const login = async () => {
+  loginForm.value.validate(async (valid:boolean) => {
+    if (valid) {
+      isLoading.value = true
+      try {
+        await useStore.userLogin(form)
+        isLoading.value = false
+        //编程式导航跳转到首页
+        $router.push({ path: '/' })
+        ElNotification({
+          type: 'success',
+          title: `${getTimeHelloMessage()}`,
+          message: '登录成功',
+        })
+      } catch (error) {
+        isLoading.value = false
+        ElNotification({
+          type: 'error',
+          title: '出错啦~',
+          message: error.message || '登录失败',
+        })
+      }
+    }
+  })
 }
 </script>
 
