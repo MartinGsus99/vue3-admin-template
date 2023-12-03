@@ -18,13 +18,13 @@ import globalComponents from '@/components'
 import router from './router'
 
 //全局图标
-import * as ElIconModules from '@element-plus/icons-vue'
+// import * as ElIconModules from '@element-plus/icons-vue'
 
 const app = createApp(App)
 
-for (let iconName in ElIconModules) {
-  app.component(iconName, ElIconModules[iconName])
-}
+// for (let iconName in ElIconModules) {
+//   app.component(iconName, ElIconModules[iconName])
+// }
 //引入pinia
 import pinia from './store'
 

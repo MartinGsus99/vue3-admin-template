@@ -3,6 +3,8 @@ import { login, getInfo } from '@/api/system/user/index'
 import type { loginForm, loginResponseData } from '@/api/system/user/type'
 import { setLocalStorage, getLocalStorage } from '@/utils/localStorage'
 import { userStateType } from '@/store/modules/types/types'
+//引入常量路由
+import { constantRoutes } from '@/router/routes'
 
 let useUserStore = defineStore('user', {
   state: (): userStateType => ({
@@ -10,6 +12,7 @@ let useUserStore = defineStore('user', {
     username: '',
     avatar: '',
     roles: [],
+    menuRoutes: constantRoutes,
   }),
   actions: {
     async userLogin(data: loginForm) {

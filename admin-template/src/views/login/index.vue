@@ -30,8 +30,9 @@
               <template #prefix>
                 <el-icon>
                   <Lock />
-                </el-icon> </template
-            ></el-input>
+                </el-icon>
+              </template>
+            </el-input>
           </el-form-item>
           <el-form-item>
             <el-button
@@ -68,24 +69,23 @@ let form = reactive({
 
 let isLoading = ref(false)
 
-const validateUsername=(rule:any,value:string,callback:any)=>{
+const validateUsername = (rule: any, value: string, callback: any) => {
   //rule:规则对象 value:表单文本值 callback:回调
-  console.log(value);
-  if(/^\d{5,10}$/.test(value)){
+  console.log(value)
+  if (/^\d{0,10}$/.test(value)) {
     callback()
-  }else{
-    callback(new Error('用户名至少需要5个字符'))
+  } else {
+    callback(new Error('用户名至少需要0个字符'))
   }
 }
 
-const validatePassword=(rule:any,value:string,callback:any)=>{
+const validatePassword = (rule: any, value: string, callback: any) => {
   //rule:规则对象 value:表单文本值 callback:回调
-  console.log(value);
-  if(value.length<6){
-    callback(new Error('密码至少需要6个字符'))
-  }else if(value.length>20){
+  if (value.length < 0) {
+    callback(new Error('密码至少需要0个字符'))
+  } else if (value.length > 20) {
     callback(new Error('密码最多20个字符'))
-  }else{
+  } else {
     callback()
   }
 }
@@ -93,19 +93,18 @@ const validatePassword=(rule:any,value:string,callback:any)=>{
 const rules = ref({
   username: [
     { required: true, message: '请输入用户名', trigger: 'blur' },
-    { validator:validateUsername, trigger: 'change' },
-  
+    { validator: validateUsername, trigger: 'change' },
   ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
-    { validator:validatePassword, trigger: 'change' },
+    { validator: validatePassword, trigger: 'change' },
   ],
 })
 
 let loginForm = ref()
 
 const login = async () => {
-  loginForm.value.validate(async (valid:boolean) => {
+  loginForm.value.validate(async (valid: boolean) => {
     if (valid) {
       isLoading.value = true
       try {
