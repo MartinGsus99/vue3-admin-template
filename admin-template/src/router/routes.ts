@@ -13,11 +13,7 @@ export const constantRoutes = [
     component: () => import('@/layout/index.vue'),
     name: 'layout',
     redirect: '/home',
-    meta: {
-      title: '首页',
-      hidden: false,
-      icon: 'House',
-    },
+    meta: {},
     children: [
       {
         path: '/home',
@@ -34,18 +30,19 @@ export const constantRoutes = [
   {
     path: '/dashboard',
     name: 'dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index.vue'),
-        name: 'Screen',
-        meta: {
-          title: '数据大屏',
-          hidden: false,
-          icon: 'DataLine',
-        },
-      },
-    ],
+    component: () => import('@/views/dashboard/index.vue'),
+    // children: [
+    //   {
+    //     path: 'dashboard',
+    //     component: () => import('@/views/dashboard/index.vue'),
+    //     name: 'Screen',
+    //     meta: {
+    //       title: '数据大屏',
+    //       hidden: false,
+    //       icon: 'DataLine',
+    //     },
+    //   },
+    // ],
     meta: {
       title: '全屏大图',
       hidden: false,

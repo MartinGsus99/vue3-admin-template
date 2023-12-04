@@ -5,9 +5,7 @@
         <Expand v-if="!layoutSetting.fold" @click="changeCollapse" />
         <Fold v-if="layoutSetting.fold" @click="changeCollapse" />
       </el-icon>
-      <el-breadcrumb :separator-icon="ArrowRight">
-        <el-breadcrumb-item :to="{ path: '/' }">123</el-breadcrumb-item>
-      </el-breadcrumb>
+      <BreadCrumb></BreadCrumb>
     </div>
     <div class="topbar-right">
       <el-button
@@ -52,6 +50,7 @@ import { defineProps } from 'vue'
 import { ArrowRight } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import useLayoutSettingStore from '@/store/modules/setting'
+import BreadCrumb from './Breadcrumb/index.vue'
 let $router = useRouter()
 
 let layoutSetting = useLayoutSettingStore()
