@@ -46,8 +46,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
-import { ArrowRight } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import useLayoutSettingStore from '@/store/modules/setting'
 import BreadCrumb from './Breadcrumb/index.vue'
@@ -57,7 +55,7 @@ let layoutSetting = useLayoutSettingStore()
 const changeCollapse = () => {
   layoutSetting.fold = !layoutSetting.fold
 }
-let refresh = () => {}
+const refresh = () => {}
 let fullScreen = () => {}
 let setting = () => {}
 </script>
