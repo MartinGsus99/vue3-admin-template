@@ -11,12 +11,25 @@ export const constantRoutes = [
   {
     path: '/',
     component: () => import('@/layout/index.vue'),
-    name: 'index',
+    name: 'layout',
+    redirect: '/home',
     meta: {
       title: '首页',
       hidden: false,
       icon: 'House',
     },
+    children: [
+      {
+        path: '/home',
+        component: () => import('@/views/home/index.vue'),
+        name: 'home',
+        meta: {
+          title: '首页',
+          hidden: false,
+          icon: 'House',
+        },
+      },
+    ],
   },
   {
     path: '/dashboard',
@@ -25,11 +38,11 @@ export const constantRoutes = [
       {
         path: 'dashboard',
         component: () => import('@/views/dashboard/index.vue'),
-        name: 'analysis',
+        name: 'Screen',
         meta: {
-          title: '大屏数据',
+          title: '数据大屏',
           hidden: false,
-          icon: 'Plus',
+          icon: 'DataLine',
         },
       },
     ],
@@ -41,16 +54,17 @@ export const constantRoutes = [
   },
   {
     path: '/sys',
-    component: () => import('@/views/sys/user/index.vue'),
     name: 'sys',
     meta: {
       title: '系统管理',
       hidden: false,
       icon: 'Monitor',
     },
+    redirect: '/sys/user',
+    component: () => import('@/layout/index.vue'),
     children: [
       {
-        path: 'user',
+        path: '/sys/user',
         component: () => import('@/views/sys/user/index.vue'),
         name: 'user',
         meta: {
@@ -60,7 +74,7 @@ export const constantRoutes = [
         },
       },
       {
-        path: 'role',
+        path: '/sys/role',
         component: () => import('@/views/sys/role/index.vue'),
         name: 'role',
         meta: {
@@ -70,7 +84,7 @@ export const constantRoutes = [
         },
       },
       {
-        path: 'log',
+        path: '/sys/log',
         component: () => import('@/views/sys/log/index.vue'),
         name: 'log',
         meta: {

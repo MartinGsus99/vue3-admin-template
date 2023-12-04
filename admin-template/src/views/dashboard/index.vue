@@ -1,5 +1,5 @@
 <template>
-  <div class="">1</div>
+  <div class="">数据大屏</div>
 </template>
 
 <script setup>
