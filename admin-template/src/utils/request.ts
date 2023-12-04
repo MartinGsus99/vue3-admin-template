@@ -44,7 +44,7 @@ request.interceptors.response.use(
         message = '网络错误'
     }
     ElMessage.error(error.message || message)
-    console.log('err', error)
+
 
     return Promise.reject(error)
   }

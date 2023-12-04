@@ -6,7 +6,6 @@ const allGlobalComponents = {
 
 //图标组件
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-console.log(ElementPlusIconsVue)
 
 export default {
   //务必叫做install

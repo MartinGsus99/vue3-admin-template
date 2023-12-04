@@ -71,7 +71,7 @@ let isLoading = ref(false)
 
 const validateUsername = (rule: any, value: string, callback: any) => {
   //rule:规则对象 value:表单文本值 callback:回调
-  console.log(value)
+
   if (/^\d{0,10}$/.test(value)) {
     callback()
   } else {

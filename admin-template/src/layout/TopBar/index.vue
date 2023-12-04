@@ -2,8 +2,8 @@
   <div class="topbar">
     <div class="topbar-left">
       <el-icon class="icon">
-        <Expand v-if="isCollapse" @click="changeCollapse" />
-        <Fold v-if="!isCollapse" @click="changeCollapse" />
+        <Expand v-if="!layoutSetting.fold" @click="changeCollapse" />
+        <Fold v-if="layoutSetting.fold" @click="changeCollapse" />
       </el-icon>
       <el-breadcrumb :separator-icon="ArrowRight">
         <el-breadcrumb-item :to="{ path: '/' }">123</el-breadcrumb-item>
@@ -38,8 +38,8 @@
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>退出登录</el-dropdown-item>
             <el-dropdown-item>个人中心</el-dropdown-item>
+            <el-dropdown-item @click="">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -51,10 +51,13 @@
 import { defineProps } from 'vue'
 import { ArrowRight } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
-defineProps(['isCollapse', 'changeCollapse'])
+import useLayoutSettingStore from '@/store/modules/setting'
 let $router = useRouter()
-console.log($router)
-let collapse = () => {}
+
+let layoutSetting = useLayoutSettingStore()
+const changeCollapse = () => {
+  layoutSetting.fold = !layoutSetting.fold
+}
 let refresh = () => {}
 let fullScreen = () => {}
 let setting = () => {}
