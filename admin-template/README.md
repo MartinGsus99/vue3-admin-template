@@ -1,18 +1,40 @@
-# Vue 3 + TypeScript + Vite
+# Vue3-Admin-Template
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+> Vue3-admin-template基于vue3、TypeScript、Pinia、ElementPlus、Axios、Echarts等开源项目构建，旨在为中小型企业创建一个后台管理系统模板，开箱即用哦~
 
-## Recommended IDE Setup
+## 一、项目结构
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Type Support For `.vue` Imports in TS
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## 二、启动方式
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+> 项目基于Node18进行开发，请使用Node18以上的版本启动；
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+```
+# .env.development
+NODE_ENV='development'
+VITE_APP_TITLE='后台管理模板'
+VITE_APP_BASE_API='http://127.0.0.1:4523/m1/3655073-0-default'
+```
+
+> 将VITE_APP_BASE_API修改为后端地址即可连接后端
+
+```shell
+#npm
+npm install 
+npm run dev
+```
+
+## 三、通用组件说明
+
+
+
+## 四、路由管理
+
+
+
+## 五、请我喝杯咖啡~
+
+![](https://s3.bmp.ovh/imgs/2023/12/05/146b6c01b7ac2269.jpg)
+
+![](https://s3.bmp.ovh/imgs/2023/12/05/120f9ade692abc6e.jpg)
