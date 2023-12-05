@@ -1,13 +1,15 @@
 <template>
   <div class="logo">
     <img v-if="setting.logoHidden" :src="setting.logo" />
-    <p>{{ setting.tilte }}</p>
+    <p v-if="!layoutSetting.fold">{{ setting.tilte }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
 import {} from 'vue'
 import setting from '@/setting'
+import useLayoutSettingStore from '@/store/modules/setting'
+let layoutSetting = useLayoutSettingStore()
 </script>
 
 <style lang="scss" scoped>
