@@ -49,15 +49,25 @@
 import { useRouter } from 'vue-router'
 import useLayoutSettingStore from '@/store/modules/setting'
 import BreadCrumb from './Breadcrumb/index.vue'
-let $router = useRouter()
 
 let layoutSetting = useLayoutSettingStore()
 const changeCollapse = () => {
   layoutSetting.fold = !layoutSetting.fold
 }
-const refresh = () => {}
-let fullScreen = () => {}
-let setting = () => {}
+const refresh = () => {
+  layoutSetting.refresh = !layoutSetting.refresh
+}
+const fullScreen = () => {
+  //存在兼容性的问题，可以使用全屏插件
+  //dom对象的一个属性，可以用来判断是不是全屏模式（全屏：true，不是：false）
+  let full = document.fullscreenElement
+  if (!full) {
+    document.documentElement.requestFullscreen()
+  } else {
+    document.exitFullscreen()
+  }
+}
+const setting = () => {}
 </script>
 
 <style lang="scss" scoped>

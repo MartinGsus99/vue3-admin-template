@@ -1,19 +1,29 @@
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fade">
-      <component :is="Component" />
+      <component :is="Component" v-if="destroyFlag" />
     </transition>
   </router-view>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { watch, ref, nextTick } from 'vue'
+import useLayoutSettingStore from '@/store/modules/setting'
+let layoutSetting = useLayoutSettingStore()
 
-export default defineComponent({
-  setup() {
-    return {}
-  },
-})
+//控制当前组件是否销毁
+let destroyFlag = ref(true)
+
+watch(
+  () => layoutSetting.refresh,
+  () => {
+    destroyFlag.value = false
+    //销毁再创建，next Tick保证销毁的组件渲染完
+    nextTick(() => {
+      destroyFlag.value = true
+    })
+  }
+)
 </script>
 
 <style scoped>
