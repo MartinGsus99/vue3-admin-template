@@ -6,4 +6,8 @@ let getLocalStorage = (key: string) => {
   return localStorage.getItem(key)
 }
 
-export { setLocalStorage, getLocalStorage }
+let removeLocalStorage = (key: string) => {
+  localStorage.removeItem(key)
+}
+
+export { setLocalStorage, getLocalStorage, removeLocalStorage }

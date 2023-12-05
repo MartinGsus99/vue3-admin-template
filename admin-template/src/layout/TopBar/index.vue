@@ -29,7 +29,7 @@
       <el-avatar class="avatar" :size="24" :src="circleUrl" />
       <el-dropdown>
         <span class="el-dropdown-link">
-          个人中心
+          {{ userStore.username }}
           <el-icon class="el-icon--right">
             <arrow-down />
           </el-icon>
@@ -37,7 +37,7 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item @click="">退出登录</el-dropdown-item>
+            <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -46,11 +46,14 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import useLayoutSettingStore from '@/store/modules/setting'
 import BreadCrumb from './Breadcrumb/index.vue'
-
+import useUserStore from '@/store/modules/user'
+let $router = useRouter()
+let $route = useRoute()
 let layoutSetting = useLayoutSettingStore()
+let userStore = useUserStore()
 const changeCollapse = () => {
   layoutSetting.fold = !layoutSetting.fold
 }
@@ -68,6 +71,19 @@ const fullScreen = () => {
   }
 }
 const setting = () => {}
+
+const logout = () => {
+  //调用退出登录的接口，取消token
+  //清除token，用户数据
+  userStore.userLogout()
+  //跳转登录页
+  $router.push({
+    path: '/login',
+    query: {
+      redirect: $route.path,
+    },
+  })
+}
 </script>
 
 <style lang="scss" scoped>

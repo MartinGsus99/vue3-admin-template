@@ -54,14 +54,14 @@ import { reactive, ref } from 'vue'
 import { User, Lock } from '@element-plus/icons-vue'
 import { login } from '@/api/system/user/index.ts'
 import useUserStore from '@/store/modules/user.ts'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import { getTimeHelloMessage } from '@/utils/time.ts'
 
 let useStore = useUserStore()
 
 let $router = useRouter()
-
+let $route = useRoute()
 let form = reactive({
   username: '',
   password: '',
@@ -110,14 +110,16 @@ const login = async () => {
       try {
         await useStore.userLogin(form)
         isLoading.value = false
-        //编程式导航跳转到首页
-        $router.push({ path: '/' })
+        //编程式导航跳转,如果有query参数，跳转到query否则首页
+        let redirect: any = $route.query.redirect
+        $router.push({ path: redirect || '/' })
+
         ElNotification({
           type: 'success',
           title: `${getTimeHelloMessage()}`,
           message: '登录成功',
         })
-      } catch (error) {
+      } catch (error: any) {
         isLoading.value = false
         ElNotification({
           type: 'error',

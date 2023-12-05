@@ -1,7 +1,11 @@
 import { defineStore } from 'pinia'
 import { login, getInfo } from '@/api/system/user/index'
 import type { loginForm, loginResponseData } from '@/api/system/user/type'
-import { setLocalStorage, getLocalStorage } from '@/utils/localStorage'
+import {
+  setLocalStorage,
+  getLocalStorage,
+  removeLocalStorage,
+} from '@/utils/localStorage'
 import { userStateType } from '@/store/modules/types/types'
 //引入常量路由
 import { constantRoutes } from '@/router/routes'
@@ -20,6 +24,11 @@ let useUserStore = defineStore('user', {
         if (res.success) {
           //由于pinia|vuex存储数据其实是利用js对象，应当本地持久化存储
           this.token = res.data.token as string
+          this.username = res.data.username
+          this.avatar =
+            'https://s3.bmp.ovh/imgs/2023/12/05/60498fd418563800.jpeg' ||
+            res.data.avatar
+          this.roles = res.data.roles
           setLocalStorage('token', res.data.token.toString())
           //保证当前async函数返回成功promise
           return 'ok'
@@ -28,7 +37,14 @@ let useUserStore = defineStore('user', {
         }
       })
     },
-    userLogout() {},
+    userLogout() {
+      this.token = ''
+      this.username = ''
+      this.avatar = ''
+      this.roles = []
+
+      removeLocalStorage('token')
+    },
   },
   getters: {
     getToken(): string {

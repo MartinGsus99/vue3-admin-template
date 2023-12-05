@@ -5,6 +5,9 @@ export interface loginForm {
 
 interface dataType {
   token: string
+  username: string
+  avatar: string
+  roles: string[]
   message: string
 }
 
