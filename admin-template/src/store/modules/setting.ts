@@ -8,7 +8,7 @@ let useLayoutSettingStore = defineStore('layoutSetting', {
     refresh: false, //页面刷新
     drawer: false, //抽屉
     theme: 'light', //主题
-    color: '#17A9DE',
+    color: '',
   }),
 })
 
