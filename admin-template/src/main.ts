@@ -20,6 +20,9 @@ import router from './router'
 //全局图标
 // import * as ElIconModules from '@element-plus/icons-vue'
 
+//暗黑模式
+import 'element-plus/theme-chalk/dark/css-vars.css'
+
 const app = createApp(App)
 
 // for (let iconName in ElIconModules) {

@@ -34,6 +34,9 @@
     >
       <Main></Main>
     </div>
+
+    <!-- 侧边抽屉 -->
+    <Drawer></Drawer>
   </div>
 </template>
 
@@ -43,6 +46,7 @@ import TopBar from './TopBar/index.vue'
 import Logo from './Logo/index.vue'
 import Menu from './Menu/index.vue'
 import Main from './Main/index.vue'
+import Drawer from './TopBar/Drawer/index.vue'
 //引入user数据
 import useUserStore from '@/store/modules/user'
 import useLayoutSettingStore from '@/store/modules/setting'
@@ -57,7 +61,6 @@ console.log('layout', layoutSetting.fold)
 .layout_container {
   width: 100%;
   height: 100vh;
-  background-color: #ffffff;
 
   .layout_slider {
     width: $layout-slider-width;
@@ -81,7 +84,7 @@ console.log('layout', layoutSetting.fold)
     position: fixed;
     width: calc(100% - $layout-slider-width);
     height: $layout-nav-height;
-    background-color: $layout-nav-bg;
+
     top: 0;
     left: $layout-slider-width;
     padding: 10px;
@@ -96,7 +99,7 @@ console.log('layout', layoutSetting.fold)
     position: absolute;
     width: calc(100% - $layout-slider-width);
     height: calc(100vh - $layout-nav-height);
-    background-color: $layout-content-bg;
+
     left: $layout-slider-width;
     top: $layout-nav-height;
     padding: 20px;

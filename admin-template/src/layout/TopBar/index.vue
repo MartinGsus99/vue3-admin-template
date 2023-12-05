@@ -70,7 +70,9 @@ const fullScreen = () => {
     document.exitFullscreen()
   }
 }
-const setting = () => {}
+const setting = () => {
+  layoutSetting.drawer = true
+}
 
 const logout = () => {
   //调用退出登录的接口，取消token
