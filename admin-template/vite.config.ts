@@ -1,4 +1,4 @@
-import { defineConfig, UserConfigExport, ConfigEnv } from 'vite'
+import { defineConfig, UserConfigExport, ConfigEnv, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -9,7 +9,9 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 //引入mock
 import mockDevServerPlugin from 'vite-plugin-mock-dev-server'
 // https://vitejs.dev/config/
-export default defineConfig(({ command }) => {
+export default defineConfig(({ command, mode }) => {
+  let env = loadEnv(mode, process.cwd())
+
   return {
     plugins: [
       vue(),
@@ -37,6 +39,16 @@ export default defineConfig(({ command }) => {
         scss: {
           javascriptEnabled: true,
           additionalData: '@import "./src/styles/variable.scss";',
+        },
+      },
+    },
+    //代理跨域
+    server: {
+      proxy: {
+        [env.VITE_APP_BASE_API]: {
+          target: env.VITE_SERVE,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
         },
       },
     },

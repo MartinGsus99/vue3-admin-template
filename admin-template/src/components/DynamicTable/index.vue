@@ -15,11 +15,11 @@
         :width="item.width"
         align="center"
       ></el-table-column>
-      <el-table-column fixed="right" label="操作" width="120" align="center">
+      <el-table-column fixed="right" label="操作" align="center">
         <template #default>
           <el-button
             link
-            type="primary"
+            :type="item.type"
             size="small"
             v-for="item in operationData"
             :key="item"
