@@ -31,24 +31,23 @@ export const constantRoutes = [
     path: '/dashboard',
     name: 'dashboard',
     component: () => import('@/views/dashboard/index.vue'),
-    // children: [
-    //   {
-    //     path: 'dashboard',
-    //     component: () => import('@/views/dashboard/index.vue'),
-    //     name: 'Screen',
-    //     meta: {
-    //       title: '数据大屏',
-    //       hidden: false,
-    //       icon: 'DataLine',
-    //     },
-    //   },
-    // ],
     meta: {
       title: '全屏大图',
       hidden: false,
       icon: 'DataLine',
     },
   },
+  {
+    path: '/yuyu',
+    name: 'Yuyu',
+    component: () => import('@/views/yuyu/index.vue'),
+    meta: {
+      title: '音乐APP',
+      hidden: false,
+      icon: 'DataLine',
+    },
+  },
+
   {
     path: '/sys',
     name: 'sys',

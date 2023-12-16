@@ -1,6 +1,7 @@
 //axios二次封装
 import axios from 'axios'
-
+//引入用户相关仓库
+import useUserStore from '@/store/modules/user'
 import { ElMessage } from 'element-plus'
 
 let request = axios.create({
@@ -11,8 +12,12 @@ let request = axios.create({
 
 //request实例添加请求拦截器
 request.interceptors.request.use((config) => {
+  //获取用户仓库
+  let userStroe = useUserStore()
+  if (userStroe.token) {
+    config.headers.token = userStroe.token
+  }
   //返回配置对象，headers属性请求头，经常给服务器端携带公共请求头
-
   return config
 })
 
@@ -44,7 +49,6 @@ request.interceptors.response.use(
         message = '网络错误'
     }
     ElMessage.error(error.message || message)
-
 
     return Promise.reject(error)
   }

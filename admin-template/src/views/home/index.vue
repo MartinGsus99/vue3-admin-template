@@ -20,8 +20,7 @@
   </div>
 </template>
 
-<script setup>
-import {} from 'vue'
+<script setup lang="ts">
 import useUserStore from '@/store/modules/user'
 import { getTimeHelloMessage } from '@/utils/time'
 let userStore = useUserStore()

@@ -1,7 +1,7 @@
 <template>
   <div class="logo">
     <img v-if="setting.logoHidden" :src="setting.logo" />
-    <p v-if="!layoutSetting.fold">{{ setting.tilte }}</p>
+    <p v-if="!layoutSetting.fold">{{ setting.tittle }}</p>
   </div>
 </template>
 

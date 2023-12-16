@@ -24,11 +24,6 @@ let useUserStore = defineStore('user', {
         if (res.success) {
           //由于pinia|vuex存储数据其实是利用js对象，应当本地持久化存储
           this.token = res.data.token as string
-          this.username = res.data.username
-          this.avatar =
-            'https://s3.bmp.ovh/imgs/2023/12/05/60498fd418563800.jpeg' ||
-            res.data.avatar
-          this.roles = res.data.roles
           setLocalStorage('token', res.data.token.toString())
           //保证当前async函数返回成功promise
           return 'ok'
@@ -37,12 +32,27 @@ let useUserStore = defineStore('user', {
         }
       })
     },
+    async userInfor() {
+      let data = {
+        token: '',
+      }
+      data.token = this.token
+      let res = await getInfo(data)
+      console.log('Infor,res', res)
+      if (res.data.success) {
+        this.username = res.data.username
+        this.avatar = res.data.avatar
+        this.roles = res.data.roles
+        return 'ok'
+      } else {
+        return Promise.reject('获取用户信息失败！')
+      }
+    },
     userLogout() {
       this.token = ''
       this.username = ''
       this.avatar = ''
       this.roles = []
-
       removeLocalStorage('token')
     },
   },

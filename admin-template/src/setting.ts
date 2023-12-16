@@ -1,6 +1,6 @@
 //用于项目logo 标题配置
 export default {
-  tilte: '治煜科技',
+  tittle: 'Martin Admin',
   logo: '/public/cursec.png',
   logoHidden: true,
 }

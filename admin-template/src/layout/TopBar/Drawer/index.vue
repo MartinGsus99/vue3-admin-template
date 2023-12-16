@@ -27,7 +27,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import useLayoutSettingStore from '@/store/modules/setting'
 let layoutSetting = useLayoutSettingStore()

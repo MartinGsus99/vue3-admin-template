@@ -23,6 +23,8 @@ import router from './router'
 //暗黑模式
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
+//引入DataV
+import DataVVue3 from '@kjgl77/datav-vue3'
 const app = createApp(App)
 
 // for (let iconName in ElIconModules) {
@@ -31,11 +33,15 @@ const app = createApp(App)
 //引入pinia
 import pinia from './store'
 
+//鉴权
+import './permission'
 app.use(pinia)
 app.use(router)
 app.use(ElementPlus)
 app.use(ElementPlus, {
   locale: zhCn,
 })
+
 app.use(globalComponents)
+app.use(DataVVue3)
 app.mount('#app')

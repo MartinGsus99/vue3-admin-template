@@ -75,10 +75,10 @@ const setting = () => {
 }
 
 const logout = () => {
-  //调用退出登录的接口，取消token
-  //清除token，用户数据
+  //1.调用退出登录的接口，取消token
+  //2.清除token，用户数据
   userStore.userLogout()
-  //跳转登录页
+  //3.跳转登录页
   $router.push({
     path: '/login',
     query: {

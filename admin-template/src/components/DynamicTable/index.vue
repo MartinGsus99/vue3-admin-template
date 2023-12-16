@@ -9,7 +9,7 @@
         align="center"
       />
       <el-table-column
-        v-for="item in tableHeadData"
+        v-for="(item, index) in tableHeadData"
         :prop="item.prop"
         :label="item.label"
         :width="item.width"
