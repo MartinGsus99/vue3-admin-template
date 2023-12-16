@@ -11,22 +11,22 @@
       <el-button
         size="small"
         icon="Refresh"
-        circle="true"
+        :circle="true"
         @click="refresh"
       ></el-button>
       <el-button
         size="small"
         icon="FullScreen"
-        circle="true"
+        :circle="true"
         @click="fullScreen"
       ></el-button>
       <el-button
         size="small"
         icon="Setting"
-        circle="true"
+        :circle="true"
         @click="setting"
       ></el-button>
-      <el-avatar class="avatar" :size="24" :src="circleUrl" />
+      <el-avatar class="avatar" :size="24" :src="userStore.avatar" />
       <el-dropdown>
         <span class="el-dropdown-link">
           {{ userStore.username }}

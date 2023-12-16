@@ -9,13 +9,13 @@ interface dataType {
   avatar: string
   roles: string[]
   message: string
+  success: boolean
 }
 
 export interface loginResponseData {
   code: number
   data: dataType
   success: boolean
-  message: string
 }
 
 interface userInfo {

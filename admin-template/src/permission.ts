@@ -9,8 +9,6 @@ import pinia from './store'
 import useUserStore from './store/modules/user'
 //使用小仓库需要先引入大仓库pinia
 let userStore = useUserStore(pinia)
-console.log(userStore)
-
 //关闭圈圈
 NProgress.configure({ showSpinner: false })
 
@@ -25,10 +23,8 @@ router.beforeEach(async (to: any, from: any, next: any) => {
 
   let token = userStore.token
   let username = userStore.username
-  console.log('初始', token)
 
   if (token) {
-    console.log('Has token')
     if (to.path == '/login') {
       next({ path: '/' })
     } else {
@@ -50,7 +46,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
 
     //用户登陆成功：不能访问Login，指向首页，其余的都能访问
   } else {
-    console.log('No token')
+
 
     //用户登录失败跳转登录页面
     if (to.path == '/login') {

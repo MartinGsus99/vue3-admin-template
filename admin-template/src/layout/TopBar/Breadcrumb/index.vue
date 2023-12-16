@@ -23,7 +23,7 @@ import useUserStore from '@/store/modules/user'
 import { useRoute } from 'vue-router'
 let userStore = useUserStore()
 let $route = useRoute()
-console.log(userStore.menuRoutes)
+
 </script>
 
 <style lang="scss" scoped>

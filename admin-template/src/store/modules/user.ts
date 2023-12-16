@@ -21,7 +21,7 @@ let useUserStore = defineStore('user', {
   actions: {
     async userLogin(data: loginForm) {
       await login(data).then((res: loginResponseData) => {
-        if (res.success) {
+        if (res.data.success) {
           //由于pinia|vuex存储数据其实是利用js对象，应当本地持久化存储
           this.token = res.data.token as string
           setLocalStorage('token', res.data.token.toString())
@@ -38,7 +38,7 @@ let useUserStore = defineStore('user', {
       }
       data.token = this.token
       let res = await getInfo(data)
-      console.log('Infor,res', res)
+  
       if (res.data.success) {
         this.username = res.data.username
         this.avatar = res.data.avatar

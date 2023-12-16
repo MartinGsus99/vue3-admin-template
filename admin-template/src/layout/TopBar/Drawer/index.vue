@@ -41,10 +41,14 @@ const changeTheme = () => {
 }
 
 const changeColor = () => {
-  console.log(color.value)
+
   const html = document.documentElement
   html.style.setProperty('--el-color-primary', color.value)
-  console.log(html)
+
+}
+
+const handleClose = () => {
+  layoutSetting.drawer = !layoutSetting.drawer
 }
 
 const predefineColors = ref([

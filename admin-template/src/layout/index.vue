@@ -54,7 +54,7 @@ import { useRoute } from 'vue-router'
 let userStore = useUserStore()
 let $route = useRoute()
 let layoutSetting = useLayoutSettingStore()
-console.log('layout', layoutSetting.fold)
+
 </script>
 
 <style lang="scss" scoped>
